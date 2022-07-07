@@ -1,0 +1,22 @@
+version: "3"
+services:
+  pytorch-cuda-lab:
+    container_name: pytorch-cuda-lab
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - .:/home/jovyan/work
+    ports:
+      - "8888:8888"
+      - "6006:6006"
+    environment:
+      JUPYTER_ENABLE_LAB: "yes"
+    shm_size: "8gb"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]

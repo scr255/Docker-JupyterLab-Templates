@@ -1,0 +1,5 @@
+black
+delta-spark==1.2.1
+isort
+jupyterlab_code_formatter
+jupyterlab-git

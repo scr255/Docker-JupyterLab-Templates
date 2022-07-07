@@ -1,0 +1,15 @@
+version: "3"
+services:
+  pytorch-cpu-lab:
+    container_name: pytorch-cpu-lab
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - .:/home/jovyan/work
+    ports:
+      - "8888:8888"
+      - "6006:6006"
+    environment:
+      JUPYTER_ENABLE_LAB: "yes"
+    shm_size: "8gb"
