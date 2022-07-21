@@ -1,5 +1,5 @@
 black
-delta-spark==1.2.1
+delta-spark==2.0.0
 isort
 jupyterlab_code_formatter
 jupyterlab-git
