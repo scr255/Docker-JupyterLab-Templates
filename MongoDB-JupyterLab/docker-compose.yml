@@ -1,0 +1,55 @@
+version: "3"
+services:
+  mongodb-lab:
+    container_name: mongodb-lab
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - .:/home/jovyan/work
+    ports:
+      - "8888:8888"
+    environment:
+      JUPYTER_ENABLE_LAB: "yes"
+    depends_on:
+      - mongodb
+    networks:
+      - mongodbnet
+
+  mongodb-express:
+    container_name: mongo-express
+    image: mongo-express:latest
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: "mongodb"
+      ME_CONFIG_MONGODB_ADMINPASSWORD: "pass"
+      ME_CONFIG_MONGODB_SERVER: "mongodb"
+      ME_CONFIG_MONGODB_PORT: "27017"
+    restart: always
+    depends_on:
+      - mongodb
+    networks:
+      - mongodbnet
+
+  mongodb:
+    container_name: mongodb
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodata:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "mongodb"
+      MONGO_INITDB_ROOT_PASSWORD: "pass"
+    restart: always
+    networks:
+      - mongodbnet
+
+networks:
+  mongodbnet:
+    driver: bridge
+
+volumes:
+  mongodata:
+      name: mongo_external

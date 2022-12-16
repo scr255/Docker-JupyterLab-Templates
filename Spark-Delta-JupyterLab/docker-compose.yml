@@ -1,0 +1,14 @@
+version: "3"
+services:
+  spark-delta-lab:
+    container_name: spark-delta-lab
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - .:/home/jovyan/work
+    ports:
+      - "8888:8888"
+      - "4040-4080:4040-4080"
+    environment:
+      JUPYTER_ENABLE_LAB: "yes"
