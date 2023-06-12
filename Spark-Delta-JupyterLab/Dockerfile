@@ -1,3 +1,3 @@
-FROM jupyter/pyspark-notebook:spark-3.3.2
+FROM jupyter/pyspark-notebook:spark-3.4.0
 COPY requirements.txt /tmp
 RUN pip install -r /tmp/requirements.txt
